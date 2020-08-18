@@ -7,7 +7,7 @@ const CompressionPlugin = require('compression-webpack-plugin') // Gzip
 
 module.exports = {
   publicPath: '/',
-  outputDir: 'dist',
+  outputDir: 'base-serve',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: true,
   // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
@@ -22,7 +22,7 @@ module.exports = {
     port: 8020,
     https: false,
     // 配置自动启动浏览器
-    open: true,
+    open: false,
     // 热更新
     hotOnly: true,
     disableHostCheck: true,

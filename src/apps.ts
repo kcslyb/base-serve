@@ -3,6 +3,7 @@ import {
   registerMicroApps,
   addGlobalUncaughtErrorHandler
 } from 'qiankun'
+import LocalStorageUtil from '@/utils/storageUtil'
 
 function genActiveRule (routerPrefix: string) {
   return (location: { pathname: string }) => location.pathname.startsWith(routerPrefix)
@@ -11,10 +12,10 @@ function genActiveRule (routerPrefix: string) {
 // 微应用注册信息
 const apps: Array<any> = [
   {
-    name: 'savour',
-    entry: '//localhost:8021',
-    container: '#savour',
-    activeRule: genActiveRule('/savour')
+    name: 'savour', // 微应用名称，随便取
+    entry: '//127.0.0.1:8021', // 微应用的地址及端口
+    container: '#savour', // 微应用的挂载点：微应用会挂载在主应用id为savour的标签上
+    activeRule: genActiveRule('/savour') // 微应用匹配规则：url变化会触发该匹配规则，匹配到的微应用便会挂载到container
   }
 ]
 
@@ -26,17 +27,12 @@ const apps: Array<any> = [
 registerMicroApps(apps, {
   // qiankun 生命周期钩子 - 微应用加载前
   beforeLoad: (app: any) => {
-    // 加载微应用前，加载进度条
-    // NProgress.start();
-    console.log('before load', app.name)
-    return Promise.resolve()
+    LocalStorageUtil.getInstance().setItem('appName', app.name)
+    return Promise.resolve(app)
   },
   // qiankun 生命周期钩子 - 微应用挂载后
   afterMount: (app: any) => {
-    // 加载微应用前，进度条加载完成
-    // NProgress.done();
-    console.log('after mount', app.name)
-    return Promise.resolve()
+    return Promise.resolve(app)
   }
 })
 
@@ -44,11 +40,9 @@ registerMicroApps(apps, {
  * 添加全局的未捕获异常处理器
  */
 addGlobalUncaughtErrorHandler((event: Event | string) => {
-  console.error(event)
-  const { message: msg } = event as any
   // 加载失败时提示
-  if (msg && msg.includes('died in status LOADING_SOURCE_CODE')) {
-    console.error('微应用加载失败，请检查应用是否可运行')
+  if (typeof event !== 'string' && event.type && event.type === 'error') {
+    throw new Error(`apps 微应用加载失败，请检查应用是否可运行: ${(event as any).message}`)
   }
 })
 

@@ -1,20 +1,39 @@
 <template>
-  <div>
-    <div id="app">
-      <router-view/>
-    </div>
-    <div id="savour">
+  <div class="home">
+    <sys-menu></sys-menu>
+    <div :id="appName">
       <router-view/>
     </div>
   </div>
 </template>
+<script>
 
-<style lang="scss">
-#app {
+import SysMenu from '@/views/SysMenu'
+import LocalStorageUtil from '@/utils/storageUtil'
+export default {
+  name: 'app',
+  components: { SysMenu },
+  data () {
+    return {
+      appName: 'app'
+    }
+  },
+  created () {
+    this.initData()
+  },
+  methods: {
+    initData () {
+      const appName = LocalStorageUtil.getInstance().getItem('appName')
+      this.appName = appName || 'app'
+    }
+  }
+}
+</script>
+<style lang="less">
+body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 

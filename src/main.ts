@@ -4,7 +4,10 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import startBaseServe from './apps'
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 
+Vue.use(Antd)
 startBaseServe()
 
 Vue.config.productionTip = false
@@ -12,5 +15,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h: (arg0: any) => any) => h(App)
 }).$mount('#app')
