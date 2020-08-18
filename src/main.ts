@@ -4,10 +4,10 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import startBaseServe from './apps'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(Antd)
+Vue.use(ElementUI)
 startBaseServe()
 
 Vue.config.productionTip = false
