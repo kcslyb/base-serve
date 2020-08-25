@@ -3,7 +3,6 @@ import {
   registerMicroApps,
   addGlobalUncaughtErrorHandler
 } from 'qiankun'
-import LocalStorageUtil from '@/utils/storageUtil'
 
 function genActiveRule (routerPrefix: string) {
   return (location: { pathname: string }) => location.pathname.startsWith(routerPrefix)
@@ -12,10 +11,14 @@ function genActiveRule (routerPrefix: string) {
 // 微应用注册信息
 const apps: Array<any> = [
   {
-    name: 'savour', // 微应用名称，随便取
-    entry: '//127.0.0.1:8021', // 微应用的地址及端口
-    container: '#savour', // 微应用的挂载点：微应用会挂载在主应用id为savour的标签上
-    activeRule: genActiveRule('/savour') // 微应用匹配规则：url变化会触发该匹配规则，匹配到的微应用便会挂载到container
+    // 微应用名称，随便取
+    name: 'savour',
+    // 微应用的地址及端口
+    entry: '//127.0.0.1:8021',
+    // 微应用的挂载点：微应用会挂载在主应用id为micro-container的标签上
+    container: '#micro-container',
+    // 微应用匹配规则：url变化会触发该匹配规则，匹配到的微应用便会挂载到container
+    activeRule: genActiveRule('/savour')
   }
 ]
 
@@ -25,12 +28,11 @@ const apps: Array<any> = [
  * 第二个参数 - 全局生命周期钩子
  */
 registerMicroApps(apps, {
-  // qiankun 生命周期钩子 - 微应用加载前
+  // 生命周期钩子 - 微应用加载前
   beforeLoad: (app: any) => {
-    LocalStorageUtil.getInstance().setItem('appName', app.name)
     return Promise.resolve(app)
   },
-  // qiankun 生命周期钩子 - 微应用挂载后
+  // 生命周期钩子 - 微应用挂载后
   afterMount: (app: any) => {
     return Promise.resolve(app)
   }
@@ -46,5 +48,5 @@ addGlobalUncaughtErrorHandler((event: Event | string) => {
   }
 })
 
-// 导出 qiankun 的启动函数
+// 导出的启动函数
 export default start

@@ -1,14 +1,23 @@
 <template>
   <div class="home">
+    <sys-menu></sys-menu>
+    <div id="basic-container">
+      <router-view/>
+    </div>
+    <div id="micro-container">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
 import LocalStorageUtil from '@/utils/storageUtil'
+import SysMenu from '@/views/SysMenu'
 
 export default {
   name: 'SysHome',
   components: {
+    SysMenu
   },
   data () {
     return {

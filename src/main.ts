@@ -5,9 +5,12 @@ import router from './router'
 import store from './store'
 import startBaseServe from './apps'
 import ElementUI from 'element-ui'
+import KcsCommon from 'kcs-common/packages/index'
 import 'element-ui/lib/theme-chalk/index.css'
+import './config/router'
 
 Vue.use(ElementUI)
+Vue.use(KcsCommon)
 startBaseServe()
 
 Vue.config.productionTip = false

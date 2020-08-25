@@ -10,6 +10,10 @@ const routes: Array<RouteConfig> = [
     name: 'SysHome',
     component: SysHome
   }, {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/account/login/Login.vue')
+  }, {
     path: '/statistical',
     name: 'statistical',
     component: () => import('../views/statistical/Statistical.vue')

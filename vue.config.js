@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const vConsolePlugin = require('vconsole-webpack-plugin')
+const ConsolePlugin = require('vconsole-webpack-plugin')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const CompressionPlugin = require('compression-webpack-plugin') // Gzip
 
@@ -59,8 +59,7 @@ module.exports = {
       })
     ]
     const pluginsDev = [
-      // eslint-disable-next-line new-cap
-      new vConsolePlugin({
+      new ConsolePlugin({
         filter: [], // 需要过滤的入口文件
         enable: false // 发布代码前记得改回 false
       })
