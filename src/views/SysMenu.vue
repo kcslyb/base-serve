@@ -15,7 +15,7 @@
       </div>
       <div class="menu-right">
         <div class="user">
-          <a-avatar class="user-icon" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          <el-avatar class="user-icon" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           <div class="user-name">渣渣灰</div>
         </div>
         <div class="logout">退出</div>

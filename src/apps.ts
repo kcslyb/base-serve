@@ -14,10 +14,10 @@ const apps: Array<any> = [
     // 微应用名称，随便取
     name: 'savour',
     // 微应用的地址及端口
-    entry: '//127.0.0.1:8021',
+    entry: '//127.0.0.1:8021/savour',
     // 微应用的挂载点：微应用会挂载在主应用id为micro-container的标签上
     container: '#micro-container',
-    // 微应用匹配规则：url变化会触发该匹配规则，匹配到的微应用便会挂载到container
+    // 微应用匹配规则：url变化会触发该匹规则，匹配到的微应用便会挂载到container
     activeRule: genActiveRule('/savour')
   }
 ]
@@ -44,7 +44,7 @@ registerMicroApps(apps, {
 addGlobalUncaughtErrorHandler((event: Event | string) => {
   // 加载失败时提示
   if (typeof event !== 'string' && event.type && event.type === 'error') {
-    throw new Error(`apps 微应用加载失败，请检查应用是否可运行: ${(event as any).message}`)
+    throw new Error(`apps: 捕获子应用全局异常: ${(event as any).message}`)
   }
 })
 

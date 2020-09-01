@@ -1,12 +1,6 @@
 <template>
   <div class="home">
     <sys-menu></sys-menu>
-    <div id="basic-container">
-      <router-view/>
-    </div>
-    <div id="micro-container">
-      <router-view/>
-    </div>
   </div>
 </template>
 

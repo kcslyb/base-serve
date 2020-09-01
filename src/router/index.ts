@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'SysHome',
+    name: 'Login',
     component: SysHome
   }, {
     path: '/login',

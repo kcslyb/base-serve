@@ -116,8 +116,9 @@ export default {
     handleLogin () {
       this.$refs.login.validate((valid) => {
         if (valid) {
-          actions.setGlobalState(state => {
-            return Object.assign({}, state, { user: this.user })
+          actions.setGlobalState(this.user)
+          this.$router.push('/savour').catch((e) => {
+            throw new Error(e)
           })
           // this.$store.dispatch('Login', this.user).then(res => {
           //   if (res) {
