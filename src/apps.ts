@@ -14,7 +14,7 @@ const apps: Array<any> = [
     // 微应用名称，随便取
     name: 'savour',
     // 微应用的地址及端口
-    entry: '//127.0.0.1:8021/savour',
+    entry: process.env === 'product' ? '//127.0.0.1:8021/savour' : '//127.0.0.1:8021',
     // 微应用的挂载点：微应用会挂载在主应用id为micro-container的标签上
     container: '#micro-container',
     // 微应用匹配规则：url变化会触发该匹规则，匹配到的微应用便会挂载到container

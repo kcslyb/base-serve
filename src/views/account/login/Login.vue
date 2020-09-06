@@ -44,7 +44,7 @@
                     label-width="100px"
                     prop="passWord"
                     label="用户密码">
-                    <el-input type="password" v-model="user.passWord"></el-input>
+                    <el-input type="password" v-model="user.passWord" @keyup.enter.native="handleLogin"></el-input>
                   </el-form-item>
                 </el-form>
                 <div>
@@ -70,7 +70,7 @@
 </template>
 <script>
 import LocalStorageUtil from '../../../utils/storageUtil'
-import actions from '../../../shared/actions'
+import EncryptHelper from 'kcs-common/utils/encryption-util'
 
 export default {
   name: 'Login',
@@ -109,35 +109,22 @@ export default {
     setUserDate () {
       const user = LocalStorageUtil.getInstance().getItem('user')
       if (user) {
-        // eslint-disable-next-line no-undef
         this.user = EncryptHelper.aesDecrypt(user)
       }
     },
     handleLogin () {
       this.$refs.login.validate((valid) => {
         if (valid) {
-          actions.setGlobalState(this.user)
-          this.$router.push('/savour').catch((e) => {
-            throw new Error(e)
-          })
-          // this.$store.dispatch('Login', this.user).then(res => {
-          //   if (res) {
-          //     LocalStorageUtil.getInstance().clear()
-          //     actions.setGlobalState(state => {
-          //       return Object.assign({}, state, { user: res })
-          //     })
-          //     if (this.user.remember) {
-          //       // eslint-disable-next-line no-undef
-          //       const encrypt = EncryptHelper.aesEncrypt(JSON.stringify(this.user))
-          //       LocalStorageUtil.getInstance().setItem('user', encrypt)
-          //     }
-          //     this.$router.push('/home').catch((e) => {
-          //       throw new Error(e)
-          //     })
-          //   }
-          // }).catch((e) => {
-          //   throw new Error(e)
-          // })
+          this.$store.dispatch('Login', this.user).then(res => {
+            console.info(res)
+            if (res) {
+              if (this.user.remember) {
+                const encrypt = EncryptHelper.aesEncrypt(JSON.stringify(this.user))
+                LocalStorageUtil.getInstance().setItem('user', encrypt)
+              }
+              this.$router.push('/savour').catch((e) => console.error(e))
+            }
+          }).catch((e) => console.error(e))
         }
       })
     },
@@ -198,7 +185,7 @@ export default {
   .border-item {
     clear: left;
     width: 100%;
-    box-shadow: 0 0 0 2px #e5e5e5;
+    box-shadow: 0 0 0 2px #b3d8ff;
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
   }
@@ -223,17 +210,15 @@ export default {
   }
 
   .is-active {
-    border-bottom: 1px solid #007bff;
-
-    a {
-      color: #000;
-      background-color: #fff;
-    }
+    color: #3a8ee6;
+    font-weight: bold;
+    background-color: #fafafa;
+    border-bottom: 1px solid #3a8ee6;
   }
 
   .not-active {
     background-color: #fafafa;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #b3d8ff;
 
     a {
       color: #707070;
@@ -323,7 +308,7 @@ export default {
   }
 
   .login-box {
-    box-shadow: 0 0 0 2px #e5e5e5;
+    box-shadow: 0 0 0 2px #b3d8ff;
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
     padding: 15px 15px 5px;
@@ -351,7 +336,7 @@ export default {
     color: #2e2e2e;
     background-color: #e8f0fe;
     background-clip: padding-box;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #b3d8ff;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }

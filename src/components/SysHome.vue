@@ -1,17 +1,15 @@
 <template>
-  <div class="home">
-    <sys-menu></sys-menu>
+  <div class="home" style="text-align: center">
+    basic home
   </div>
 </template>
 
 <script>
 import LocalStorageUtil from '@/utils/storageUtil'
-import SysMenu from '@/views/SysMenu'
 
 export default {
   name: 'SysHome',
   components: {
-    SysMenu
   },
   data () {
     return {
