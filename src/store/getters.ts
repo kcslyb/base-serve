@@ -9,5 +9,5 @@ const getters = {
   currentRouters: (state: any) => state.menu.currentRouters,
   dict: (state: any) => state.common.dict,
   dictGroup: (state: any) => state.common.dictGroup
-};
+}
 export default getters

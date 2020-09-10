@@ -7,7 +7,7 @@ import startBaseServe from './apps'
 import ElementUI from 'element-ui'
 import KcsCommon from 'kcs-common/packages/index'
 import 'element-ui/lib/theme-chalk/index.css'
-import http from "@/config/axios"
+import http from '@/config/axios'
 import './config/router'
 
 Vue.use(ElementUI)

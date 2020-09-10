@@ -18,7 +18,7 @@ const routes: Array<RouteConfig> = [
         path: '/home',
         component: () => import('@/components/SysHome.vue'),
         meta: { isBasic: true, moduleId: 'home', title: '通知', perm: 'system-main-manage' }
-      },{
+      }, {
         path: '/home/home',
         component: () => import('@/components/SysHome.vue'),
         meta: { isBasic: true, moduleId: 'homeCopy', title: '统计', perm: 'system-main-manage' }
@@ -30,9 +30,9 @@ const routes: Array<RouteConfig> = [
     meta: { isBasic: true, moduleId: 'system', title: '系统管理', icon: 'el-icon-s-operation', perm: 'system-setting-manage' },
     children: [
       {
-        path: '/system/dict',
-        component: () => import('@/views/statistical/Statistical.vue'),
-        meta: { isBasic: true, moduleId: 'system', title: '数据字典', perm: 'system-dict-manage' }
+        path: '/system/user',
+        component: () => import('@/views/account/user/user.vue'),
+        meta: { isBasic: true, moduleId: 'system', title: '用户管理', perm: 'system-dict-manage' }
       }
     ]
   }

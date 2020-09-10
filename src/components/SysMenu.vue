@@ -88,6 +88,7 @@ export default {
     },
     handleSecondMenuClick (item) {
       this.secondMenuActive = item.path
+      this.$router.push(item.path).catch((e) => console.info(e))
     },
     handleCommand (command) {
       const process = {

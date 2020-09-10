@@ -1,7 +1,7 @@
-import {RouteConfig} from 'vue-router'
+import { RouteConfig } from 'vue-router'
 import router from '@/router'
 
-function hasPermission(route: RouteConfig, permissions: string[]): boolean {
+function hasPermission (route: RouteConfig, permissions: string[]): boolean {
   return permissions.includes(route.meta.perm)
 }
 
@@ -11,7 +11,7 @@ function hasPermission(route: RouteConfig, permissions: string[]): boolean {
  * @param router
  * @param permissions
  */
-function filterRouter(router: RouteConfig[], permissions: string[]): any {
+function filterRouter (router: RouteConfig[], permissions: string[]): any {
   return router.filter((route) => {
     if (hasPermission(route, permissions)) {
       if (route.children && route.children.length > 0) {
@@ -24,7 +24,6 @@ function filterRouter(router: RouteConfig[], permissions: string[]): any {
 
 const menu = {
   state: {
-    // @ts-ignore
     sysRouters: router.options.routes,
     currentRouters: []
   },
@@ -35,7 +34,6 @@ const menu = {
   },
   actions: {
     GenerateRoutes({ commit }: { commit: any }, data: any) {
-      // 生成路由
       return new Promise((resolve) => {
         const permissionList = data.permissions ? data.permissions : []
         const accessedRouters: RouteConfig[] = []

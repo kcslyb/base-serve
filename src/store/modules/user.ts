@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import store from '@/store/index'
 import { removeToken, setToken } from '@/config/auth.ts'
 import http from '@/config/axios.ts'
-import actions from "@/shared/actions";
+import actions from '@/shared/actions'
 
 Vue.use(Vuex)
 
@@ -21,7 +21,7 @@ const user = {
   },
   actions: {
     // 登录
-    Login({ commit, state }: { commit: any, state: any }, loginForm: object) {
+    Login ({ commit, state }: { commit: any, state: any }, loginForm: object) {
       return new Promise((resolve, reject) => {
         http.post('/login', loginForm).then((res) => {
           setToken()
@@ -32,7 +32,7 @@ const user = {
       })
     },
     // 获取用户信息
-    GetInfo({ commit }: { commit: any }) {
+    GetInfo ({ commit }: { commit: any }) {
       return new Promise((resolve, reject) => {
         http.post('/getInfo').then((res) => {
           if (res.data) {
@@ -41,8 +41,7 @@ const user = {
             // 储存用户信息
             commit('SET_USER', res.data)
             setToken()
-            store.dispatch('GenerateRoutes', res.data).then(() => {
-            })
+            store.dispatch('GenerateRoutes', res.data).catch(e => console.info(e))
             resolve(res.data)
           }
         }).catch((error) => {
@@ -51,7 +50,7 @@ const user = {
       })
     },
     // 登出
-    LogOut({ commit }: { commit: any }) {
+    LogOut ({ commit }: { commit: any }) {
       return new Promise((resolve) => {
         http.post('/logout').then((data) => {
           commit('RESET_USER')
@@ -65,7 +64,7 @@ const user = {
       })
     },
     // 登出
-    FedLogOut({ commit }: { commit: any }) {
+    FedLogOut ({ commit }: { commit: any }) {
       return new Promise((resolve) => {
         commit('RESET_USER')
         removeToken()
@@ -75,4 +74,3 @@ const user = {
   }
 }
 export default user
-

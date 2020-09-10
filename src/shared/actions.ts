@@ -1,4 +1,4 @@
-import { initGlobalState, MicroAppStateActions } from 'qiankun';
+import { initGlobalState, MicroAppStateActions } from 'qiankun'
 
 const initialState = {
   user: {}
@@ -10,7 +10,7 @@ actions.onGlobalStateChange((state, prev) => {
   console.log(state, prev)
 })
 
-actions.setGlobalState(initialState);
-actions.offGlobalStateChange();
+actions.setGlobalState(initialState)
+actions.offGlobalStateChange()
 
 export default actions
